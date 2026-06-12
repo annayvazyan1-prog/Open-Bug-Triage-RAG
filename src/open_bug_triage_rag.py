@@ -88,19 +88,7 @@ Priority: {ticket['priority']}"""
         if not query or not query.strip():
             return "Error: Please describe the bug or paste a ticket title to search."
 
-        # If the employee is filtering to a priority, honor it in the search.
-        priority_filter = None
-        for level in ("Critical", "High", "Medium", "Low"):
-            if level.lower() in query.lower():
-                priority_filter = level
-                break
-
-        if priority_filter:
-            results = self.vectorstore.similarity_search(
-                query, k=5, filter={"priority": priority_filter}
-            )
-        else:
-            results = self.vectorstore.similarity_search(query, k=5)
+        results = self.vectorstore.similarity_search(query, k=5)
 
         if not results:
             return "No similar open tickets found."
@@ -138,13 +126,11 @@ Priority: {ticket['priority']}"""
         else:
             search_text = query
 
-        # Relevance scores are in [0, 1]; higher = more similar.
-        scored = self.vectorstore.similarity_search_with_relevance_scores(
-            search_text, k=5
-        )
+        raw = self.vectorstore.similarity_search_with_score(search_text, k=5)
 
         duplicates = []
-        for doc, score in scored:
+        for doc, dist in raw:
+            score = 1.0 - float(dist)
             tid = doc.metadata.get('ticket_id')
             if tid == exclude_id:
                 continue  # never report a ticket as its own duplicate
@@ -266,8 +252,8 @@ Status: OPEN"""
                 func=self.search_similar_tickets,
                 description="""Find OPEN tickets similar to a described problem.
 Use when an employee describes a bug and wants to see related open issues, or
-asks "are there other tickets like this?". You can include a priority word
-(e.g. 'critical login bugs') to bias the search toward that priority.
+asks "are there other tickets like this?". To filter by priority, use
+SearchByPriority instead.
 Input: a bug description or ticket title."""
             ),
             Tool(

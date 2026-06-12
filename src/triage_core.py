@@ -97,20 +97,20 @@ class OpenTicketTriageTools:
         if not query or not query.strip():
             return []
         if priority:
-            scored = self.vectorstore.similarity_search_with_relevance_scores(
+            raw = self.vectorstore.similarity_search_with_score(
                 query, k=k, filter={"priority": priority}
             )
         else:
-            scored = self.vectorstore.similarity_search_with_relevance_scores(query, k=k)
+            raw = self.vectorstore.similarity_search_with_score(query, k=k)
         return [
             {
                 "Ticket": doc.metadata["ticket_id"],
                 "Title": doc.metadata["title"],
                 "Category": doc.metadata["category"],
                 "Priority": doc.metadata["priority"],
-                "Similarity": round(float(score), 3),
+                "Similarity": round(1.0 - float(dist), 3),
             }
-            for doc, score in scored
+            for doc, dist in raw
         ]
 
     def duplicate_rows(self, query, threshold=DUPLICATE_THRESHOLD):
@@ -130,16 +130,17 @@ class OpenTicketTriageTools:
                 return result
             search_text = f"{source['title']}. {source['description']}"
 
-        scored = self.vectorstore.similarity_search_with_relevance_scores(search_text, k=6)
-        for doc, score in scored:
+        raw = self.vectorstore.similarity_search_with_score(search_text, k=6)
+        for doc, dist in raw:
+            score = 1.0 - float(dist)
             if doc.metadata.get("ticket_id") == result["exclude_id"]:
                 continue
-            if float(score) >= threshold:
+            if score >= threshold:
                 result["rows"].append({
                     "Ticket": doc.metadata["ticket_id"],
                     "Title": doc.metadata["title"],
                     "Priority": doc.metadata["priority"],
-                    "Similarity": round(float(score), 3),
+                    "Similarity": round(score, 3),
                 })
         return result
 
@@ -155,11 +156,7 @@ class OpenTicketTriageTools:
     def search_similar_tickets(self, query: str) -> str:
         if not query or not query.strip():
             return "Error: Please describe the bug or paste a ticket title to search."
-        priority = next(
-            (p for p in ("Critical", "High", "Medium", "Low") if p.lower() in query.lower()),
-            None,
-        )
-        rows = self.similar_rows(query, k=5, priority=priority)
+        rows = self.similar_rows(query, k=5)
         if not rows:
             return "No similar open tickets found."
         out = f"Found {len(rows)} similar OPEN tickets:\n\n"
@@ -231,8 +228,8 @@ class OpenTicketTriageTools:
         return [
             Tool(name="SearchSimilarTickets", func=self.search_similar_tickets,
                  description="""Find OPEN tickets similar to a described problem.
-Use when an employee describes a bug and wants related open issues. You can
-include a priority word (e.g. 'critical login bugs') to bias the search.
+Use when an employee describes a bug and wants related open issues.
+To filter by priority, use SearchByPriority instead.
 Input: a bug description or ticket title."""),
             Tool(name="FindDuplicateTickets", func=self.find_duplicate_tickets,
                  description="""Detect likely DUPLICATE open tickets.
