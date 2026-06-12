@@ -1,0 +1,10 @@
+# Core LLM + embeddings (OpenAI via LangChain)
+langchain-openai>=0.1.7
+langchain-core>=0.2.0
+langchain-community>=0.2.0
+
+# Vector store
+chromadb>=0.5.0
+
+# Environment variables
+python-dotenv>=1.0.0

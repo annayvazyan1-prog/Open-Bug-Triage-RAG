@@ -1,0 +1,182 @@
+[
+  {
+    "ticket_id": "TICK-001",
+    "title": "Property search returns listings outside selected radius",
+    "description": "Users searching within a 5-mile radius receiving results 20+ miles away. Map pins appear far outside the drawn search area. Issue reproducible across all metro regions.",
+    "category": "Search",
+    "priority": "High",
+    "created_date": "2026-01-14",
+    "resolved_date": "open"
+  },
+  {
+    "ticket_id": "TICK-002",
+    "title": "Mortgage calculator showing incorrect monthly payments",
+    "description": "Affordability calculator returning monthly payments roughly 15% lower than expected. Users reporting numbers that don't match lender estimates. Affects all loan terms and rates.",
+    "category": "Mortgage Calculator",
+    "priority": "Critical",
+    "created_date": "2026-01-17",
+    "resolved_date": "open"
+  },
+  {
+    "ticket_id": "TICK-003",
+    "title": "Saved searches not sending new listing alerts",
+    "description": "Users with saved searches not receiving email alerts when matching homes hit the market. Saved criteria stored correctly, but no notifications generated for new inventory.",
+    "category": "Notifications",
+    "priority": "High",
+    "created_date": "2026-01-20",
+    "resolved_date": "open"
+  },
+  {
+    "ticket_id": "TICK-004",
+    "title": "Price filter excludes valid listings at boundary values",
+    "description": "Setting a max price of $500,000 hides homes listed at exactly $500,000. Same off-by-one behavior on the minimum price boundary. Users missing relevant listings.",
+    "category": "Search",
+    "priority": "Medium",
+    "created_date": "2026-01-23",
+    "resolved_date": "open"
+  },
+  {
+    "ticket_id": "TICK-005",
+    "title": "Listing photos loading in wrong order",
+    "description": "Property galleries displaying photos in random order on each page load. The designated primary/hero image often appears in the middle of the carousel instead of first.",
+    "category": "Media",
+    "priority": "Medium",
+    "created_date": "2026-01-26",
+    "resolved_date": "open"
+  },
+  {
+    "ticket_id": "TICK-006",
+    "title": "Map clustering freezes browser with many listings",
+    "description": "Searching dense urban areas with 2000+ results causes the map to hang for 10-15 seconds and the tab to become unresponsive. CPU usage spikes to 100% while rendering pins.",
+    "category": "Performance",
+    "priority": "High",
+    "created_date": "2026-01-29",
+    "resolved_date": "open"
+  },
+  {
+    "ticket_id": "TICK-007",
+    "title": "Favorited homes disappearing from user account",
+    "description": "Saved/favorited properties vanishing from users' lists after a day or two. Users re-favoriting the same homes repeatedly. No deletion action taken by the users.",
+    "category": "User Management",
+    "priority": "High",
+    "created_date": "2026-02-01",
+    "resolved_date": "open"
+  },
+  {
+    "ticket_id": "TICK-008",
+    "title": "Schedule-a-viewing requests not reaching agents",
+    "description": "Buyers submitting tour requests but agents never receiving them. Confirmation shown to the buyer, but no record appears in the agent dashboard or inbox.",
+    "category": "Integration",
+    "priority": "Critical",
+    "created_date": "2026-02-04",
+    "resolved_date": "open"
+  },
+  {
+    "ticket_id": "TICK-009",
+    "title": "Sold and pending homes still appearing as active",
+    "description": "Listings marked sold or under contract in the MLS still showing as 'For Sale' on the site. Buyers contacting agents about unavailable homes. Status lag of up to 48 hours.",
+    "category": "Listings",
+    "priority": "Critical",
+    "created_date": "2026-02-07",
+    "resolved_date": "open"
+  },
+  {
+    "ticket_id": "TICK-010",
+    "title": "Search results page loads extremely slowly",
+    "description": "Search results taking 25+ seconds to render. DevTools show multiple slow queries joining listings, photos, and agent data. Page unresponsive while loading. Affects all search traffic.",
+    "category": "Performance",
+    "priority": "High",
+    "created_date": "2026-02-10",
+    "resolved_date": "open"
+  },
+  {
+    "ticket_id": "TICK-011",
+    "title": "Pre-approval document upload failing for large files",
+    "description": "Buyers unable to upload pre-approval letters or proof-of-funds PDFs larger than 5MB. Progress bar reaches 100% then shows 'Upload failed'. Browser console shows a 413 error.",
+    "category": "File Upload",
+    "priority": "Medium",
+    "created_date": "2026-02-13",
+    "resolved_date": "open"
+  },
+  {
+    "ticket_id": "TICK-012",
+    "title": "Commute-time filter returning impossible results",
+    "description": "Filtering by 'under 30 min commute to work' returns homes 2+ hours away by car. Drive-time estimates wildly inaccurate. Feature unusable for relocation buyers.",
+    "category": "Search",
+    "priority": "High",
+    "created_date": "2026-02-16",
+    "resolved_date": "open"
+  },
+  {
+    "ticket_id": "TICK-013",
+    "title": "Duplicate listings appearing for the same property",
+    "description": "Same home showing two or three times in results with slightly different prices and photos. Caused by the property being listed across multiple MLS feeds. Confuses buyers and skews counts.",
+    "category": "Listings",
+    "priority": "High",
+    "created_date": "2026-02-19",
+    "resolved_date": "open"
+  },
+  {
+    "ticket_id": "TICK-014",
+    "title": "Offer submission deposit payment declined for international buyers",
+    "description": "Overseas buyers placing earnest money deposits receiving 'Payment declined' with gateway error 402. Only affects cards issued outside the US. Domestic deposits process fine.",
+    "category": "Payment",
+    "priority": "High",
+    "created_date": "2026-02-22",
+    "resolved_date": "open"
+  },
+  {
+    "ticket_id": "TICK-015",
+    "title": "Map drawing tool loses custom search area on refresh",
+    "description": "Users who draw a custom polygon to define their search area lose it whenever the page refreshes or they navigate back. Have to redraw the boundary every visit.",
+    "category": "Search",
+    "priority": "Medium",
+    "created_date": "2026-02-25",
+    "resolved_date": "open"
+  },
+  {
+    "ticket_id": "TICK-016",
+    "title": "School rating data showing for wrong addresses",
+    "description": "Listings displaying school district and rating info for a neighboring district. Buyers making decisions on incorrect school assignment data. Mismatch most common near district boundaries.",
+    "category": "Listings",
+    "priority": "High",
+    "created_date": "2026-02-28",
+    "resolved_date": "open"
+  },
+  {
+    "ticket_id": "TICK-017",
+    "title": "Price-drop notifications firing for unchanged listings",
+    "description": "Users receiving 'Price reduced!' alerts for homes whose price never changed. Some alerts triggered multiple times per day for the same listing, eroding trust in notifications.",
+    "category": "Notifications",
+    "priority": "Medium",
+    "created_date": "2026-03-03",
+    "resolved_date": "open"
+  },
+  {
+    "ticket_id": "TICK-018",
+    "title": "Listing detail API returning stale data after updates",
+    "description": "Same listing endpoint returning different prices and statuses within seconds of each other. Appears to be a caching issue. GET /api/listings/:id sometimes serves outdated info.",
+    "category": "API",
+    "priority": "Critical",
+    "created_date": "2026-03-06",
+    "resolved_date": "open"
+  },
+  {
+    "ticket_id": "TICK-019",
+    "title": "Sort by 'newest' showing old listings first",
+    "description": "Sorting search results by 'Newest' surfaces homes that have been on the market for weeks ahead of brand-new listings. Sort order appears partly reversed and inconsistent.",
+    "category": "Search",
+    "priority": "Medium",
+    "created_date": "2026-03-09",
+    "resolved_date": "open"
+  },
+  {
+    "ticket_id": "TICK-020",
+    "title": "Buyer-agent chat messages delayed by several minutes",
+    "description": "In-app messages between buyers and agents arriving 3-5 minutes late. WebSocket connection appears stable with no disconnections in logs. Affects time-sensitive offer negotiations.",
+    "category": "Real-time",
+    "priority": "High",
+    "created_date": "2026-03-12",
+    "resolved_date": "open"
+  }
+]
