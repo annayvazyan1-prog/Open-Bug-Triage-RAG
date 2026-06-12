@@ -178,5 +178,14 @@
     "priority": "High",
     "created_date": "2026-03-12",
     "resolved_date": "open"
+  },
+  {
+    "ticket_id": "TICK-021",
+    "title": "Search radius filter not respected, listings shown miles away",
+    "description": "When a user sets a 5-mile search radius the results include properties 15-25 miles outside the boundary. Map markers appear well beyond the highlighted search zone. Consistent across all cities tested.",
+    "category": "Search",
+    "priority": "High",
+    "created_date": "2026-03-15",
+    "resolved_date": "open"
   }
 ]
