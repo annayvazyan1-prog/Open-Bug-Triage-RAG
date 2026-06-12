@@ -86,8 +86,8 @@ with st.sidebar:
 # ---------------------------------------------------------------------------
 # Tabs
 # ---------------------------------------------------------------------------
-ask_tab, similar_tab, dup_tab, browse_tab, lookup_tab = st.tabs(
-    ["💬 Ask", "🔍 Find similar", "👯 Find duplicates", "📋 Browse", "🔎 Lookup"]
+ask_tab, similar_tab, dup_tab, browse_tab = st.tabs(
+    ["💬 Ask", "🔍 Find similar", "👯 Find duplicates", "📋 Browse"]
 )
 
 # --- Ask the agent ---------------------------------------------------------
@@ -155,16 +155,3 @@ with browse_tab:
         hide_index=True, use_container_width=True,
     )
 
-# --- Lookup ----------------------------------------------------------------
-with lookup_tab:
-    st.subheader("Look up one ticket")
-    tid = st.selectbox("Ticket ID", [t["ticket_id"] for t in tm.tickets])
-    t = tm.get(tid)
-    if t:
-        st.markdown(f"### [{t['ticket_id']}] {t['title']}")
-        meta1, meta2, meta3 = st.columns(3)
-        meta1.metric("Priority", t["priority"])
-        meta2.metric("Category", t["category"])
-        meta3.metric("Status", "OPEN")
-        st.write(t["description"])
-        st.caption(f"Created: {t['created_date']}")
