@@ -30,14 +30,11 @@ from langchain_core.documents import Document
 
 load_dotenv()
 
-# Default data path resolved relative to THIS file (src/), so the script runs
-# correctly no matter what the current working directory is:
-#   <repo>/src/open_bug_triage_rag.py  ->  <repo>/data/house_search_tickets_open.json
 DATA_PATH = Path(__file__).resolve().parent.parent / "data" / "house_search_tickets_open.json"
 
 # Distance/relevance threshold above which two tickets are flagged as likely
 # duplicates. Relevance scores from Chroma are normalized to [0, 1] (higher =
-# more similar). Tune this for your data — 0.78 is a sensible starting point.
+# more similar). 
 DUPLICATE_THRESHOLD = 0.78
 
 print("Setting up open-bug triage system...")
@@ -143,7 +140,7 @@ Priority: {ticket['priority']}"""
 
         # Relevance scores are in [0, 1]; higher = more similar.
         scored = self.vectorstore.similarity_search_with_relevance_scores(
-            search_text, k=6
+            search_text, k=5
         )
 
         duplicates = []
@@ -406,14 +403,14 @@ def run_agent(query: str, max_iterations: int = 5, custom_prompt: str = None) ->
 
 
 # ---------------------------------------------------------------------------
-# Demo queries
+# Evaluation : run the agent on a variety of triage queries over the open backlog.
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     print("\n" + "=" * 80)
     print("DEMO: Triage searches over the open backlog")
     print("=" * 80)
 
-    demo_queries = [
+    eval_queries = [
         # Find similar open tickets
         "Are there open tickets about search returning the wrong listings?",
         # Duplicate detection by description
@@ -432,7 +429,7 @@ if __name__ == "__main__":
         "Give me an overview of the open backlog",
     ]
 
-    for i, query in enumerate(demo_queries, 1):
+    for i, query in enumerate(eval_queries, 1):
         print(f"\n--- Query {i}: '{query}' ---")
         result = run_agent(query)
         print(f"Tools used: {result['tools_used']}")
