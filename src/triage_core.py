@@ -71,6 +71,7 @@ class OpenTicketTriageTools:
             documents=documents,
             embedding=self.embeddings,
             collection_name="open_bug_triage",
+            collection_metadata={"hnsw:space": "cosine"},
         )
 
     # ------------------------------------------------------------------
