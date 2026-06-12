@@ -50,13 +50,7 @@ class OpenTicketTriageTools:
         """Embed each ticket once and store it for similarity/duplicate search."""
         documents = []
         for t in self.tickets:
-            content = (
-                f"Ticket ID: {t['ticket_id']}\n"
-                f"Title: {t['title']}\n"
-                f"Description: {t['description']}\n"
-                f"Category: {t['category']}\n"
-                f"Priority: {t['priority']}"
-            )
+            content = f"{t['title']}. {t['description']}"
             documents.append(Document(
                 page_content=content,
                 metadata={
